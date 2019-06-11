@@ -34,25 +34,25 @@ You'll also need:
 
 ## Part 2: Set up Dynamic DNS (DDNS) access for your Mac
 
-### Primer
+#### Primer
 
 TODO
 
-### The Easy Way
+#### The Easy Way
  
 TODO
 
-### The Hard Way
+#### The Hard Way
 
 TODO
 
 ## Part 3: Set up remote access to your home network using OpenVPN
 
-### Primer
+#### Primer
 
 TODO
 
-### The Easy Way
+#### The Easy Way
 
 You'll need [Homebrew](https://brew.sh) installed.
 
@@ -64,7 +64,7 @@ chmod u+x ./scripts/openvpn.sh
 ./scripts/openvpn.sh
 ```
 
-### The Hard Way
+#### The Hard Way
 
 Fine, have it your way.
 
@@ -72,30 +72,30 @@ We have [a guide detailing how to set up OpenVPN from scratch](./docs/OpenVPN.md
 
 ## Part 4: Remotely access your Mac desktop using VNC
 
-### Primer
+#### Primer
 
 TODO
 
-### The Easy Way
+#### The Easy Way
  
 TODO
 
-### The Hard Way
+#### The Hard Way
 
 TODO
 
 
 ## Part 5: Set up remote file access using SMB
 
-### Primer
+#### Primer
 
 TODO
 
-### The Easy Way
+#### The Easy Way
  
 TODO
 
-### The Hard Way
+#### The Hard Way
 
 TODO
 
