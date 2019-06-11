@@ -48,10 +48,12 @@ Fine, have it your way.
 
 Follow [the OpenVPN docs](./docs/OpenVPN.md)
 
-# Part 3: Set up remote file access using SMB
+# Part 3: Remotely access your Mac desktop using VNC
+
+# Part 4: Set up remote file access using SMB
 
 # Resources, Further Reading, and Prior art:
 
-https://github.com/Nyr/openvpn-install/blob/master/openvpn-install.sh
-https://remonpel.nl/2012/02/set-up-an-openvpn-server-on-your-mac/
-https://openvpn.net/community-resources/how-to/#setting-up-your-own-certificate-authority-ca-and-generating-certificates-and-keys-for-an-openvpn-server-and-multiple-clients
+* https://github.com/Nyr/openvpn-install/blob/master/openvpn-install.sh
+* https://remonpel.nl/2012/02/set-up-an-openvpn-server-on-your-mac/
+* https://openvpn.net/community-resources/how-to/#setting-up-your-own-certificate-authority-ca-and-generating-certificates-and-keys-for-an-openvpn-server-and-multiple-clients
