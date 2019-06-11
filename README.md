@@ -13,24 +13,46 @@ This guide should be compatible with all recent versions of MacOS, including Yos
 * Access your home devices like printers, scanners, media servers, smart home devices, and NAS devices
 * It's free, open-source, and self-hosted
 
-#### Prerequisites:
+## Part 1: Housekeeping
 
-* A recent-spec Mac running OS X Yosemite or later that is always on
+Maccess works best when you have an always-on, desktop Mac at home. You can use an old laptop but be aware that leaving a laptop plugged in can dramatically shorten its battery/component lifespan due to insufficient cooling.
+
+#### Prerequisites
+
+For the purposes of this guide, we'll assume you have:
+
+* A Mac
+  * Always connected to power & turned on
+  * Decently spec'd with a dual-core processor and at least 8GB of memory
+  * Running OS X Yosemite or later
 * Time & Patience
 
-## Part 1: Set up Dynamic DNS (DDNS) access for your Mac
+You'll also need:
+
+* [Git](https://git-scm.com/) installed – you can do this by running `xcode-select --install`
+* [Homebrew](https://brew.sh/) – follow instructions on that page to install
+
+## Part 2: Set up Dynamic DNS (DDNS) access for your Mac
 
 ### Primer
 
 TODO
 
-## Part 2: Set up remote access to your home network using OpenVPN
+### The Easy Way
+ 
+TODO
+
+### The Hard Way
+
+TODO
+
+## Part 3: Set up remote access to your home network using OpenVPN
 
 ### Primer
 
 TODO
 
-### I like to do things the easy way
+### The Easy Way
 
 You'll need [Homebrew](https://brew.sh) installed.
 
@@ -42,19 +64,40 @@ chmod u+x ./scripts/openvpn.sh
 ./scripts/openvpn.sh
 ```
 
-### I enjoy suffering and would like to do all of this manually
+### The Hard Way
 
 Fine, have it your way.
 
-Follow [the OpenVPN docs](./docs/OpenVPN.md)
+We have [a guide detailing how to set up OpenVPN from scratch](./docs/OpenVPN.md).
 
-## Part 3: Remotely access your Mac desktop using VNC
+## Part 4: Remotely access your Mac desktop using VNC
+
+### Primer
+
+TODO
+
+### The Easy Way
+ 
+TODO
+
+### The Hard Way
+
+TODO
+
+
+## Part 5: Set up remote file access using SMB
 
 ### Primer
 
-## Part 4: Set up remote file access using SMB
+TODO
 
-### Primer
+### The Easy Way
+ 
+TODO
+
+### The Hard Way
+
+TODO
 
 ## Resources, Further Reading, and Prior art:
 
