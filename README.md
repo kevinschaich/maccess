@@ -22,15 +22,16 @@ Maccess works best when you have an always-on, desktop Mac at home. You can use 
 For the purposes of this guide, we'll assume you have:
 
 * A Mac
+  * Desktop (iMac, Mac Mini, iMac Pro, or Mac Pro) highly recommended
   * Always connected to power & turned on
-  * Decently spec'd with a dual-core processor and at least 8GB of memory
+  * Modern specs with a dual-core processor and at least 8GB of memory
   * Running OS X Yosemite or later
 * Time & Patience
 
 You'll also need:
 
-* [Git](https://git-scm.com/) installed – you can do this by running `xcode-select --install`
-* [Homebrew](https://brew.sh/) – follow instructions on that page to install
+* [Git](https://git-scm.com/) – install using `xcode-select --install`
+* [Homebrew](https://brew.sh/) – follow instructions under **Install Homebrew**
 
 ## Part 2: Set up Dynamic DNS (DDNS) access for your Mac
 

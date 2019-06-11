@@ -56,7 +56,13 @@ Provided you've edited the `vars` file above, you can just press the `Enter` key
 export KEY_CN='server' && ./build-key-server $KEY_CN
 ```
 
-Again, the defaults are fine here. Lastly, we need to generate Diffie Hellman parameters (don't worry about understanding these – the TL;DR is that these are required for the OpenVPN server to work correctly and they help make your connection more secure).
+Again, the defaults are fine here. Next, we'll add a TLS Auth signature to increase security:
+
+```bash
+openvpn --genkey --secret ta.key
+```
+
+Lastly, we need to generate Diffie Hellman parameters (don't worry about understanding these – the TL;DR is that these are required for the OpenVPN server to work correctly and they help make your connection more secure).
 
 ```bash
 ./build-dh
@@ -70,12 +76,6 @@ sudo mv ~/Library/Application\ Support/Tunnelblick/easy-rsa/keys /etc/openvpn
 ```
 
 Almost done – now we need to tell OpenVPN where to look for these certificates in a configuration file. Download the [default OpenVPN server configuration](https://github.com/OpenVPN/openvpn/blob/master/sample/sample-config-files/server.conf) – we just need to make a few changes to this file.
-
-Comment out the following line:
-
-```
-tls-auth ta.key
-```
 
 If you want to access devices on your home network *besides* the server itself, uncomment the following line:
 
@@ -102,22 +102,7 @@ If you get any popups that say `The IP address of this machine has not changed` 
 
 ### Client Configuration
 
-Again, you can accept the defaults here, just enter `y` on the last step. Next, we'll build our client certificate. This time, change `server` to something you'll recognize, like `client1`.
-
-```bash
-export KEY_CN='client1' ./build-key $KEY_CN
-```
-
-Repeat these steps for as many devices as you'd like to connect to your home VPN.
-
-
-Download the [default OpenVPN client configuration](https://github.com/OpenVPN/openvpn/blob/master/sample/sample-config-files/client.conf) and save it to your Desktop. We need to make a few changes to this file.
-
-Comment out the following line:
-
-```
-tls-auth ta.key 1
-```
+Next, we'll generate an OpenVPN Profile that we can import directly on our clients. Download the [default OpenVPN client configuration](https://github.com/OpenVPN/openvpn/blob/master/sample/sample-config-files/client.conf) and save it to your Desktop. We need to make a few changes to this file.
 
 Change the following line, replacing `my-server-1.mydomain.com` with the hostname we set up in the Dynamic DNS section: 
 
@@ -125,32 +110,34 @@ Change the following line, replacing `my-server-1.mydomain.com` with the hostnam
 remote my-server-1.mydomain.com 1194
 ```
 
-Again, change the following lines to match the names of the *client* certificates we generated earlier:
-
-```
-ca /etc/openvpn/keys/ca.crt
-cert /etc/openvpn/keys/client1.crt
-key /etc/openvpn/keys/client1.key
-```
-
-Next, we'll generate an OpenVPN Profile that we can import directly on our clients.
+The actual file that clients require is quite simple, it's just a concatenation of all the certificate files. This can get a bit tedious for multiple clients though, so we'll utilize a bash function to make this faster. Again, you can accept the defaults here, just enter `y` on the last step. Copy and paste this entire block all at once into your terminal:
 
 ```bash
-# Generates the custom client.ovpn
-cp /etc/openvpn/keys/client-common.txt ~/$1.ovpn
-echo "<ca>" >> ~/$1.ovpn
-cat /etc/openvpn/keys/easy-rsa/pki/ca.crt >> ~/$1.ovpn
-echo "</ca>" >> ~/$1.ovpn
-echo "<cert>" >> ~/$1.ovpn
-sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/keys/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
-echo "</cert>" >> ~/$1.ovpn
-echo "<key>" >> ~/$1.ovpn
-cat /etc/openvpn/keys/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
-echo "</key>" >> ~/$1.ovpn
-echo "<tls-auth>" >> ~/$1.ovpn
-sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/keys/ta.key >> ~/$1.ovpn
-echo "</tls-auth>" >> ~/$1.ovpn
+newclient () {
+    export KEY_CN='client1' ./build-key $KEY_CN
+	cp /etc/openvpn/client.conf ~/$1.ovpn
+	echo "<ca>" >> ~/$1.ovpn
+	cat /etc/openvpn/keys/ca.crt >> ~/$1.ovpn
+	echo "</ca>" >> ~/$1.ovpn
+	echo "<cert>" >> ~/$1.ovpn
+	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/keys/$1.crt >> ~/$1.ovpn
+	echo "</cert>" >> ~/$1.ovpn
+	echo "<key>" >> ~/$1.ovpn
+	cat /etc/openvpn/keys/$1.key >> ~/$1.ovpn
+	echo "</key>" >> ~/$1.ovpn
+	echo "<tls-auth>" >> ~/$1.ovpn
+	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/ta.key >> ~/$1.ovpn
+	echo "</tls-auth>" >> ~/$1.ovpn
+}
 ```
+
+Then, run:
+
+```
+newclient iphone8
+```
+
+for each client you'd like to connect to your network, replacing `iphone8` each time with a unique name you'll recognize.
 
 ### Configuring the server to start automatically
 
