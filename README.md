@@ -128,7 +128,13 @@ TODO
 
 #### Guide
 
-TODO
+1. Go to **System Preferences** > **Sharing** and check the box next to **Screen Sharing**.
+1. Hit the **+** button, choose **Your Username**, hit **Select**, and then change access to **Only These Users**.
+1. While logged into the VPN from one of your client machines, connect via VNC to your VPN server. On a Mac, this can be done by going to **Finder** > **Go** > **Connect to Server...** and entering the following address:
+
+    ```
+    vnc://10.8.0.1
+    ```
 
 ## Part 5: Set up remote file access using SMB
 
@@ -138,7 +144,15 @@ TODO
 
 #### Guide
 
-TODO
+1. Go to **System Preferences** > **Sharing** and check the box next to **File Sharing**.
+1. Add a folder under **Shared Folders**.
+1. Hit the **+** button, choose **Your Username**, hit **Select**, and then change access to **Read/Write**.
+1. Change the access for **Everyone** to **No Access**.
+1. While logged into the VPN from one of your client machines, map a network drive to the server address. On a Mac, this can be done by going to **Finder** > **Go** > **Connect to Server...** and entering the following address:
+
+    ```
+    smb://10.8.0.1
+    ```
 
 ## Resources, Further Reading, and Prior art:
 
