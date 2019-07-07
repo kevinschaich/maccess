@@ -17,6 +17,8 @@ This guide should be compatible with all recent versions of MacOS, including Yos
 
 Maccess works best when you have an always-on, desktop Mac at home. You can use an old laptop but be aware that leaving a laptop plugged in can dramatically shorten its battery/component lifespan due to insufficient cooling.
 
+We'll call the always-on desktop Mac your **server**, and the devices you want to access it from your client devices or **clients** for short.
+
 #### Prerequisites
 
 For the purposes of this guide, we'll assume you have:
@@ -55,7 +57,7 @@ TODO
 
 #### The Easy Way
 
-You'll need [Homebrew](https://brew.sh) installed.
+TODO
 
 ```
 brew cask install tunnelblick
