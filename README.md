@@ -4,7 +4,7 @@
 
 With Apple announcing the sunset of both MacOS Server and Back to My Mac, there are limited full-circle options to access your home computer and network. Maccess provides a complete guide on setting up all the components necessary so that you can access your home network via VPN from anywhere, as well as all its devices, how to access your computer remotely via VNC, how to access your files via SMB.
 
-This guide should be compatible with all recent versions of MacOS, including Yosemite, El Capitan, Sierra, High Sierra, Mojave and Catalina. In each section, we'll try to provide some primer for the technology we'll be using, a manual walkthrough of how to set it up, and (where possible) automate steps via one-click scripts.
+This guide should be compatible with all recent versions of MacOS, including Yosemite, El Capitan, Sierra, High Sierra, Mojave and Catalina. In each section, we'll try to provide some primer for the technology we'll be using, and (where possible) automate steps via one-click scripts.
 
 #### Why would I want to do this?
 
@@ -15,11 +15,11 @@ This guide should be compatible with all recent versions of MacOS, including Yos
 
 ## Part 1: Housekeeping
 
+#### Primer
+
 Maccess works best when you have an always-on, desktop Mac at home. You can use an old laptop but be aware that leaving a laptop plugged in can dramatically shorten its battery/component lifespan due to insufficient cooling.
 
 We'll call the always-on desktop Mac your **server**, and the devices you want to access it from your client devices or **clients** for short.
-
-#### Prerequisites
 
 For the purposes of this guide, we'll assume you have:
 
@@ -30,10 +30,26 @@ For the purposes of this guide, we'll assume you have:
   * Running OS X Yosemite or later
 * Time & Patience
 
-You'll also need:
+#### Guide
 
-* [Git](https://git-scm.com/) – install using `xcode-select --install`
-* [Homebrew](https://brew.sh/) – follow instructions under **Install Homebrew**
+Run these commands to install everything you need for Part 1:
+
+```bash
+# Install MacOS Developer Tools (including Git)
+xcode-select --install
+
+# Install Homebrew (https://brew.sh)
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# Navigate to your home directory:
+cd ~
+
+# Clone this repo:
+git clone https://github.com/kevinschaich/maccess.git
+
+# Make the scripts executable so you can run them in your terminal:
+chmod u+x ./scripts/*
+```
 
 ## Part 2: Set up Dynamic DNS (DDNS) access for your Mac
 
@@ -41,11 +57,7 @@ You'll also need:
 
 TODO
 
-#### The Easy Way
- 
-TODO
-
-#### The Hard Way
+#### Guide
 
 TODO
 
@@ -55,23 +67,40 @@ TODO
 
 TODO
 
-#### The Easy Way
+#### Guide
 
-TODO
+1. Create a copy of the default configuration:
+    
+    ```bash
+    # Navigate to repo root in your terminal
+    cd ~/maccess
 
-```
-brew cask install tunnelblick
-git clone https://github.com/kevinschaich/maccess
-cd maccess
-chmod u+x ./scripts/openvpn.sh
-./scripts/openvpn.sh
-```
+    # Create a config folder (hidden from version control) using default template files
+    cp -R defaults config
+    ```
 
-#### The Hard Way
+1. Find the following lines in `config/vars` and edit them if desired:
+    
+    ```bash
+    set_var EASYRSA_REQ_COUNTRY     "US"
+    set_var EASYRSA_REQ_PROVINCE    "California"
+    set_var EASYRSA_REQ_CITY        "San Francisco"
+    set_var EASYRSA_REQ_ORG         "Example Company"
+    set_var EASYRSA_REQ_EMAIL       "me@example.net"
+    set_var EASYRSA_REQ_OU          "My Organizational Unit"
+    ```
 
-Fine, have it your way.
+1. Find the following line in `config/client.conf` and change `my-server-1` to your Server's IP Address:
+    
+    ```bash
+    remote my-server-1 1194
+    ```
 
-We have [a guide detailing how to set up OpenVPN from scratch](./docs/OpenVPN.md).
+1. Run `openvpn.sh`, providing an argument for each client you want to access:
+
+    ```bash
+    ./scripts/openvpn.sh Sams-MacBook-Pro Sams-iPhone-8 Katys-iPhone-XS 
+    ```
 
 ## Part 4: Remotely access your Mac desktop using VNC
 
@@ -79,14 +108,9 @@ We have [a guide detailing how to set up OpenVPN from scratch](./docs/OpenVPN.md
 
 TODO
 
-#### The Easy Way
- 
-TODO
-
-#### The Hard Way
+#### Guide
 
 TODO
-
 
 ## Part 5: Set up remote file access using SMB
 
@@ -94,11 +118,7 @@ TODO
 
 TODO
 
-#### The Easy Way
- 
-TODO
-
-#### The Hard Way
+#### Guide
 
 TODO
 

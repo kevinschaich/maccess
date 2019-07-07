@@ -1,4 +1,6 @@
-# OpenVPN Setup
+# DEPRECATED - see [README.md](../README.md)
+
+## OpenVPN Setup
 
 > **Note:**	Steps 1-4 in this section should be completed on your server.
 
@@ -7,7 +9,7 @@
 To set up a home VPN server, we'll be using an open-source tool called [OpenVPN](https://openvpn.net/). [Tunnelblick](https://tunnelblick.net/downloads.html) is a version for Mac which packs other things we need to get started. Let's install both via Homebrew:
 
 ```bash
-brew install openvpn
+brew install openvpn openssl
 brew cask install tunnelblick
 ```
 
@@ -20,7 +22,7 @@ cd ~/Library/Application\ Support/Tunnelblick/easy-rsa
 vim vars
 ```
 
-Scroll to the very bottom of the file and edit `KEY_COUNTRY`, `KEY_PROVINCE`, and `KEY_CITY` parameters to match your location. Once you're done, the last block should look something like this:
+You can either adopt the template in `defaults/vars`, or edit this file manually. Scroll to the very bottom of the file and edit `KEY_COUNTRY`, `KEY_PROVINCE`, and `KEY_CITY` parameters to match your location. Once you're done, the last block should look something like this:
 
 ```bash
 export KEY_COUNTRY="US"
@@ -42,6 +44,7 @@ Let's load this data into our terminal environment, then generate our CA certifi
 ```bash
 source ./vars
 ./clean-all
+source ./vars
 ./build-ca
 ```
 
